@@ -20,27 +20,31 @@ class Quiz {
  
     }
     checkAnswer(answer) {
-        this.correctAnswers ++;
-    }
-    hasEnded() {
-        if (this.currentQuestionIndex < this.questions.length){
-            return false 
-        }
-    if(this.currentQuestionIndex === this.questions.length) {
-    return true
-}
-
- }
- filterQuestionsByDifficulty(difficulty) {
- {
-      
-        if (difficulty >= 1 && difficulty <= 3) {
-          
-          this.questions = this.questions.filter(question => question.difficulty === difficulty);
+        const question = this.getQuestion()
+        const correctAnswers = question.answer === answer
+        if (correctAnswers) {
+          this.correctAnswers++
         }
       }
-      
-    }
+    
+      hasEnded() {
+        if (this.currentQuestionIndex < this.questions.length) {
+          return false;
+        } else if (this.currentQuestionIndex == this.questions.length) {
+          return true;
+        }
+      }
+      filterQuestionsByDifficulty(difficulty) {
+        if (difficulty < 1 || difficulty > 3 || typeof difficulty !== "number") {
+          return;
+        }
+        const filteredQuestions = this.questions.filter((question) => {
+          return question.difficulty === difficulty;
+        });
+        this.questions = filteredQuestions;
+    
+        return this.questions;
+      }
     averageDifficulty() {
         const sum = this.questions.reduce((total, question) =>
     {
