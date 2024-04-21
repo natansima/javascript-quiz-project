@@ -101,17 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const label = document.createElement("label");
       label.innerText = choice;
       
-      // Create radio input element
-      const radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "choice";
-      radioInput.value = choice;
+        const radioInput = document.createElement("input")
+          radioInput.type = "radio"
+          radioInput.name = "choice"
+          radioInput.value = choice
+
+          choiceContainer.appendChild(radioInput);
+          choiceContainer.appendChild(label);
       
-      // Append radio input and label to choice container
-      choiceContainer.appendChild(radioInput);
-      choiceContainer.appendChild(label);
-      
-      // Add line break
       choiceContainer.appendChild(document.createElement("br"));
     });
   }
@@ -130,8 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    if (selectedAnswer !== undefined) {
-      correctAnswer = quiz.checkAnswer(selectedAnswer);
       quiz.moveToNextQuestion();
       showQuestion();
     }
@@ -163,13 +158,4 @@ document.addEventListener("DOMContentLoaded", () => {
       let minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
       let seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
 
-      // Display the time remaining in the time remaining container
-      const timeRemainingContainer = document.getElementById("timeRemaining");
-      timeRemainingContainer.innerText = `${minutes}:${seconds}`;
-    }, 1000);
 
-    let restarButton = document.getElementById('restartButton');
-    restarButton.addEventListener('click', () => {
-      window.location.reload();
-    });
-  });
